@@ -112,14 +112,26 @@ public strictfp class RobotPlayer {
         for (Direction dir : directions)
             if (tryMine(dir))
                 System.out.println("I mined soup! " + rc.getSoupCarrying());
+
+            //try to build refinery
+        if(!nearbyRobot(RobotType.REFINERY)) {
+            if (turnCount%100 == 0) {
+                if (tryBuild(RobotType.REFINERY, randomDirection())) {
+                    System.out.println("build a Refinery School");
+                    numRefinery++;
+                }
+            }
+        }
+        //try to build lanscape school
         if(!nearbyRobot(RobotType.DESIGN_SCHOOL)) {
-            if (numDesignSchool <= 5) {
+            if (turnCount%100 == 0) {
                 if (tryBuild(RobotType.DESIGN_SCHOOL, randomDirection())) {
-                    System.out.println("build a Design School");
+                    System.out.println("build a Disign School");
                     numDesignSchool++;
                 }
             }
         }
+
         if(rc.getSoupCarrying() == 20) {
             if (!nearbyRobot(RobotType.REFINERY)) {
                 for (Direction dir : directions){
@@ -163,7 +175,7 @@ public strictfp class RobotPlayer {
     }
 
     static void runDesignSchool() throws GameActionException {
-        if ( numLandscaper < 3 ) {
+        if ( numLandscaper < 4 ) {
             for (Direction dir : directions)
                 if (tryBuild(RobotType.LANDSCAPER, dir)) {
                     System.out.println("build a landscaper");
