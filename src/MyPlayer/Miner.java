@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Miner extends Unit {
 
     int numDesignSchools = 0;
+    int numRefineries = 0;
     ArrayList<MapLocation> soupLocations = new ArrayList<MapLocation>();
 
     public Miner(RobotController r) {
@@ -16,6 +17,7 @@ public class Miner extends Unit {
         super.takeTurn();
 
         numDesignSchools += comms.getNewDesignSchoolCount();
+        
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
 
@@ -36,6 +38,12 @@ public class Miner extends Unit {
             if(tryBuild(RobotType.DESIGN_SCHOOL, Util.randomDirection()))
                 System.out.println("created a design school");
         }
+
+        if (numRefineries < 1){
+            if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
+                System.out.println("created a refinery");
+        }
+
 
         if (rc.getSoupCarrying() == RobotType.MINER.soupLimit) {
             // time to go back to the HQ
