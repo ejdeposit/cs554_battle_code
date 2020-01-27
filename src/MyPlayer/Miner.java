@@ -39,7 +39,7 @@ public class Miner extends Unit {
                 System.out.println("created a design school");
         }
 
-        if (numRefineries < 1){
+        if (numRefineries < 2){
             if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
                 System.out.println("created a refinery");
         }
