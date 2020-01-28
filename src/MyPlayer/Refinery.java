@@ -7,6 +7,7 @@ public class Refinery extends Building {
         super(r);
     }
 
+
     @Override
     public void takeTurn() throws GameActionException {
         super.takeTurn();
@@ -17,4 +18,6 @@ public class Refinery extends Building {
             }
         }
     }
+
+
 }
