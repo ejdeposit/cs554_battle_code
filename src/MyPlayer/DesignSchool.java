@@ -3,7 +3,9 @@ package MyPlayer;
 import battlecode.common.*;
 
 public class DesignSchool extends Building {
-    public DesignSchool(RobotController r) throws GameActionException{
+    int numLandscapers = 0;
+
+    public DesignSchool(RobotController r) throws GameActionException {
         super(r);
     }
 
@@ -14,8 +16,11 @@ public class DesignSchool extends Building {
         comms.broadcastDesignSchoolCreation(rc.getLocation());
 
         for (Direction dir : Util.directions) {
-            if(tryBuild(RobotType.LANDSCAPER, dir)) {
-                System.out.println("made a landscaper");
+            if (numLandscapers <3) {
+                if (tryBuild(RobotType.LANDSCAPER, dir)) {
+                    System.out.println("made a landscaper");
+                    numLandscapers=numLandscapers+1;
+                }
             }
         }
     }

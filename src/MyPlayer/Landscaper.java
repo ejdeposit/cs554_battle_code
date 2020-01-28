@@ -64,7 +64,7 @@ public class Landscaper extends Unit {
         }
         if(rc.canDigDirt(dir)){
             rc.digDirt(dir);
-            rc.setIndicatorDot(rc.getLocation().add(dir), 255, 0, 0);
+            rc.setIndicatorDot(rc.getLocation().add(dir), 155, 0, 0);
             return true;
         }
         return false;
