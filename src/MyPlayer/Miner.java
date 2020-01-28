@@ -13,6 +13,8 @@ public class Miner extends Unit {
         super(r);
     }
 
+    MapLocation refineryLoc= null;
+
     public void takeTurn() throws GameActionException {
         super.takeTurn();
 
@@ -20,6 +22,14 @@ public class Miner extends Unit {
         
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
+
+        if(refineryLoc == null){
+            refineryLoc=comms.getRefineryLocFromBlockchain();
+            if(refineryLoc != null){
+                numRefineries +=1;
+            }
+        }
+
 
         for (Direction dir : Util.directions)
             if (tryMine(dir)) {
@@ -30,25 +40,36 @@ public class Miner extends Unit {
                 }
             }
         // mine first, then when full, deposit
-        for (Direction dir : Util.directions)
+        for (Direction dir : Util.directions) {
             if (tryRefine(dir))
                 System.out.println("I refined soup! " + rc.getTeamSoup());
-
-        if (numDesignSchools < 3){
-            if(tryBuild(RobotType.DESIGN_SCHOOL, Util.randomDirection()))
-                System.out.println("created a design school");
         }
 
-        if (numRefineries < 1){
+        // not sure why this if statement is causing miners not to build refineries
+        //if (numRefineries < 1){
+        if (turnCount%25 ==0){
             if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
                 System.out.println("created a refinery");
         }
 
 
+        //this iff statement does not limit design schools correctly for some reason
+        //if (numDesignSchools < 1){
+        if (turnCount%35 ==0){
+            if(tryBuild(RobotType.DESIGN_SCHOOL, Util.randomDirection()))
+                System.out.println("created a design school");
+        }
+
         if (rc.getSoupCarrying() == RobotType.MINER.soupLimit) {
-            // time to go back to the HQ
-            if(nav.goTo(hqLoc))
-                System.out.println("moved towards HQ");
+            if(refineryLoc != null) {
+                if(nav.goTo(refineryLoc))
+                    System.out.println("moved towards Refinery");
+            }
+            else{
+                // time to go back to the HQ
+                if(nav.goTo(hqLoc))
+                    System.out.println("moved towards HQ");
+            }
         } else if (soupLocations.size() > 0) {
             nav.goTo(soupLocations.get(0));
             rc.setIndicatorLine(rc.getLocation(), soupLocations.get(0), 255, 255, 0);
