@@ -9,11 +9,13 @@ public class Communications {
 
     // all messages from our team should start with this so we can tell them apart
     static final int teamSecret = 444444444;
+
     // the second entry in every message tells us what kind of message it is. e.g. 0 means it contains the HQ location
     static final String[] messageType = {
             "HQ loc",
             "design school created",
             "soup location",
+            "Refinery loc"
     };
 
     public Communications(RobotController r) {
@@ -24,6 +26,16 @@ public class Communications {
         int[] message = new int[7];
         message[0] = teamSecret;
         message[1] = 0;
+        message[2] = loc.x; // x coord of HQ
+        message[3] = loc.y; // y coord of HQ
+        if (rc.canSubmitTransaction(message, 3))
+            rc.submitTransaction(message, 3);
+    }
+
+    public void sendRefineryLoc(MapLocation loc) throws GameActionException {
+        int[] message = new int[7];
+        message[0] = teamSecret;
+        message[1] = 3;
         message[2] = loc.x; // x coord of HQ
         message[3] = loc.y; // y coord of HQ
         if (rc.canSubmitTransaction(message, 3))
@@ -43,7 +55,23 @@ public class Communications {
         return null;
     }
 
+    public MapLocation getRefineryLocFromBlockchain() throws GameActionException {
+        for (int i = 1; i < rc.getRoundNum(); i++){
+            for(Transaction tx : rc.getBlock(i)) {
+                int[] mess = tx.getMessage();
+                if(mess[0] == teamSecret && mess[1] == 3){
+                    System.out.println("found the Refinery!");
+                    return new MapLocation(mess[2], mess[3]);
+                }
+            }
+        }
+        return null;
+    }
+
+
+
     public boolean broadcastedCreation = false;
+
     public void broadcastDesignSchoolCreation(MapLocation loc) throws GameActionException {
         if(broadcastedCreation) return; // don't re-broadcast
 
@@ -57,6 +85,7 @@ public class Communications {
             broadcastedCreation = true;
         }
     }
+
 
     // check the latest block for unit creation messages
     public int getNewDesignSchoolCount() throws GameActionException {
