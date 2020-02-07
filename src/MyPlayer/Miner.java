@@ -18,7 +18,14 @@ public class Miner extends Unit {
     public void takeTurn() throws GameActionException {
         super.takeTurn();
 
+        /*
+        int tempCount=0;
+        tempCount = comms.getNewDesignSchoolCount();
+        System.out.println("design school count" + Integer.toString(tempCount));
+         */
+
         numDesignSchools += comms.getNewDesignSchoolCount();
+        System.out.println("i found design schools! " + numDesignSchools);
         
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
