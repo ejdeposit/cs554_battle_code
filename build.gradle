@@ -310,7 +310,7 @@ task unpackClient32(type: Copy, dependsOn: configurations.client32) {
 
     from {
         configurations.client32.collect {
-            zipTree(it)fd
+            zipTree(it)
         }
     }
     into 'client32/'
