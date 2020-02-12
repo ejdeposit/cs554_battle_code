@@ -11,7 +11,7 @@ public class Refinery extends Building {
     /*@Override
     public void takeTurn() throws GameActionException {
         super.takeTurn();
-        comms.sendRefineryLoc(rc.getLocation());
+        //comms.sendRefineryLoc(rc.getLocation());
         for(Direction dir : Util.directions){
             if(tryBuild(RobotType.MINER,dir)) {
                 System.out.println("made a miner");

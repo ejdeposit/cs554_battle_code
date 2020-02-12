@@ -17,9 +17,10 @@ public class FulFillmentCenter extends Building {
                     System.out.println("created a drone");
                 }
         }
-
-
-
+        else{
+            System.out.println("Doing Nothing");
+        }
+        System.out.println("I do this every turn.");
     }
 
 }
