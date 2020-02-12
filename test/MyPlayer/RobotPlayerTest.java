@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 public class RobotPlayerTest {
 	RobotController rcMock;
 	HQ hqMock;
+	Miner minerMock;
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 
@@ -48,6 +49,7 @@ public class RobotPlayerTest {
 		//hqMock.numMiners=0;
 		hqMock.turnCount=2;
 		hqMock.takeTurn();
+
 		//assertThat(outContent.toString(), equalTo("I made a miner!"));
 		assertThat(outContent.toString(), containsString("I made a miner!"));
 	}
@@ -55,6 +57,43 @@ public class RobotPlayerTest {
 	public void restoreStreams() {
 		System.setOut(originalOut);
 	}
+
+
+	@Before
+	public void MinersWithSoupMoveTowardRefineryWhenFoundSetUp() throws GameActionException{
+		rcMock = mock(RobotController.class);
+		minerMock = new Miner(rcMock);
+		MapLocation hqLoc = new MapLocation(15,15);
+
+		//miner.refineryLoc= miner.adjacentLocation(Direction.NORTH);
+
+		// the first statement after the try doesn't execute for some reason
+		when(rcMock.getSoupCarrying()).thenReturn(RobotType.MINER.soupLimit);
+		when(rcMock.getSoupCarrying()).thenReturn(RobotType.MINER.soupLimit);
+		when(minerMock.comms.getNewDesignSchoolCount()).thenReturn(1);
+
+		minerMock.hqLoc= hqLoc;
+
+		System.setOut(new PrintStream(outContent));
+	}
+	@Test
+	public void MinersWithSoupMoveTowardRefineryWhenFoundand()throws GameActionException{
+		//Miner miner =  new Miner(rcMock);
+		MapLocation minerLoc = new MapLocation(1,1);
+		MapLocation refineryLoc = new MapLocation(10,10);
+		minerMock.refineryLoc=refineryLoc;
+		minerMock.turnCount=2;
+
+		minerMock.takeTurn();
+		//assertThat(outContent.toString(), equalTo("I made a miner!"));
+		assertThat(outContent.toString(), containsString("Moved towards refinery."));
+	}
+	@After
+	public void tearDownMinersWithSoupMoveTowardRefineryWhenFound() {
+		System.setOut(originalOut);
+	}
+
+
 
 	@Before
 	public void create(){

@@ -70,7 +70,7 @@ public class Miner extends Unit {
         if (rc.getSoupCarrying() == RobotType.MINER.soupLimit) {
             if(refineryLoc != null) {
                 if(nav.goTo(refineryLoc))
-                    System.out.println("moved towards Refinery");
+                    System.out.println("Moved towards refinery.");
             }
             else{
                 // time to go back to the HQ
