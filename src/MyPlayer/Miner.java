@@ -77,11 +77,8 @@ public class Miner extends Unit {
                 System.out.println("created a refinery");
         }
         //building fulfillment centers
-<<<<<<< HEAD
 
-=======
         if (fullfillmentCenterNearBy < 1){
->>>>>>> 920aa5e1731536e359cb36ba959fcdef3fb50de5
             if(tryBuild(RobotType.FULFILLMENT_CENTER, Util.randomDirection()))
                 System.out.println("created a FULFILLMENT CENTER");
                 //numFulfillmentCenters++;
