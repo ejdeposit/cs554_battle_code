@@ -19,6 +19,7 @@ public class HQ extends Building {
             for (Direction dir : Util.directions)
                 if(tryBuild(RobotType.MINER, dir)){
                     numMiners++;
+                    System.out.println("I made a miner!");
                 }
         }
     }
