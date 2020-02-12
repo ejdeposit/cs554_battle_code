@@ -41,4 +41,9 @@ public class Navigation {
     boolean goTo(MapLocation destination) throws GameActionException {
         return goTo(rc.getLocation().directionTo(destination));
     }
+
+    // navigate away from a particular location
+    boolean goAwayFrom(MapLocation destination) throws GameActionException {
+        return goTo(rc.getLocation().directionTo(destination).opposite());
+    }
 }

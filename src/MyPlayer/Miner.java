@@ -26,28 +26,21 @@ public class Miner extends Unit {
          */
         //change this to local variable since class attributes get reset or something
         int designSchoolCount=0;
+        int fullfillmentCenterCount=0;
         //does this method get count of all design schools or just recently created ones?
         //answer just recently created.  so need a better way to see if design schools are there are not
         //have design schools broadcast location each turn like refineries.  they probably can spare the byte
         // codes to do that
         designSchoolCount += comms.getNewDesignSchoolCount();
+        fullfillmentCenterCount += comms.getFulfillmentCenterCount();
+        //getFulfillmentcenterCount not working try something else.
+        MapLocation fulfillmentLocation=null;
+        fulfillmentLocation=comms.getFulfillmentLocFromBlockchain();
 
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
 
-        // not sure if this is best location for checking and building refineries. change later if needed
-        //maybe need to add method similar to get design
-        if(refineryLoc == null){
-            refineryLoc=comms.getRefineryLocFromBlockchain();
-            if(refineryLoc != null){
-                numRefineries +=1;
-            }
-            else {
-                // moved this here so miners only build refinery if one not found in blockchain
-                if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
-                    System.out.println("created a refinery");
-            }
-        }
+
 
 
         for (Direction dir : Util.directions)
@@ -65,16 +58,20 @@ public class Miner extends Unit {
         }
 
 
+
         //building fulfillment centers
-        if (turnCount%30 ==0){
+        //modding turn count plus robot id so they don't all try to build at same time
+        /*
+        if (fullfillmentCenterCount < 1 && fulfillmentLocation == null && (turnCount+rc.getID())%4==0){
             if(tryBuild(RobotType.FULFILLMENT_CENTER, Util.randomDirection()))
                 System.out.println("created a FULFILLMENT CENTER");
                 //numFulfillmentCenters++;
         }
-
+*/
 
         //use local variable instead of class attribute
-        if (designSchoolCount < 1){
+        //modding turncount so they don't all build at same time
+        if (designSchoolCount < 1 && (turnCount+rc.getID())%4==0){
         //if (turnCount%35 ==0){
             if(tryBuild(RobotType.DESIGN_SCHOOL, Util.randomDirection()))
                 System.out.println("created a design school");
@@ -97,7 +94,24 @@ public class Miner extends Unit {
             // otherwise, move randomly as usual
             System.out.println("I moved randomly!");
         }
+        // moved here so they try to build refinery before design school
+        if(refineryLoc == null){
+            refineryLoc=comms.getRefineryLocFromBlockchain();
+            if(refineryLoc != null){
+                numRefineries +=1;
+                System.out.println("found refinery location");
+            }
+            else {
+                // moved this here so miners only build refinery if one not found in blockchain
+                //nav.goAwayFrom(hqLoc);
+                if(tryBuild(RobotType.REFINERY, Util.randomDirection())) {
+                    //if (tryBuild(RobotType.REFINERY, rc.getLocation().directionTo(hqLoc).opposite()))
+                    System.out.println("created a refinery");
+                }
+            }
+        }
     }
+
 
     /**
      * Attempts to mine soup in a given direction.

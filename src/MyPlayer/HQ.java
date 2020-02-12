@@ -15,11 +15,24 @@ public class HQ extends Building {
         if(turnCount == 1) {
             comms.sendHqLoc(rc.getLocation());
         }
+
         if(numMiners < 5) {
-            for (Direction dir : Util.directions)
+            for (Direction dir : Util.directions){
                 if(tryBuild(RobotType.MINER, dir)){
                     numMiners++;
+                    System.out.println("I made a miner!");
+                }else {
+                    System.out.println("I tried to make a miner.");
                 }
+                System.out.println(dir);
+                System.out.println(numMiners);
+            }
+
         }
+        else{
+            //System.out.println("Nothing.");
+        }
+
+        //System.out.println("Hello?");
     }
 }

@@ -15,7 +15,8 @@ public class Communications {
             "HQ loc",
             "design school created",
             "soup location",
-            "Refinery loc"
+            "Refinery loc",
+            "Fulfillment Center"
     };
 
     public Communications(RobotController r) {
@@ -36,6 +37,16 @@ public class Communications {
         int[] message = new int[7];
         message[0] = teamSecret;
         message[1] = 3;
+        message[2] = loc.x; // x coord of HQ
+        message[3] = loc.y; // y coord of HQ
+        if (rc.canSubmitTransaction(message, 3))
+            rc.submitTransaction(message, 3);
+    }
+
+    public void sendFulfillmentLoc(MapLocation loc) throws GameActionException {
+        int[] message = new int[7];
+        message[0] = teamSecret;
+        message[1] = 4;
         message[2] = loc.x; // x coord of HQ
         message[3] = loc.y; // y coord of HQ
         if (rc.canSubmitTransaction(message, 3))
@@ -69,12 +80,27 @@ public class Communications {
         return null;
     }
 
+    public MapLocation getFulfillmentLocFromBlockchain() throws GameActionException {
+        for (int i = 1; i < rc.getRoundNum(); i++){
+            for(Transaction tx : rc.getBlock(i)) {
+                int[] mess = tx.getMessage();
+                if(mess[0] == teamSecret && mess[1] == 4){
+                    System.out.println("found the Fullfillment center!");
+                    return new MapLocation(mess[2], mess[3]);
+                }
+            }
+        }
+        return null;
+    }
+
 
 
     public boolean broadcastedCreation = false;
 
     public void broadcastDesignSchoolCreation(MapLocation loc) throws GameActionException {
-        if(broadcastedCreation) return; // don't re-broadcast
+
+        //change to rebroadcast every turn.
+        //if(broadcastedCreation) return; // don't re-broadcast
 
         int[] message = new int[7];
         message[0] = teamSecret;
@@ -83,7 +109,22 @@ public class Communications {
         message[3] = loc.y; // y coord of HQ
         if (rc.canSubmitTransaction(message, 3)) {
             rc.submitTransaction(message, 3);
-            broadcastedCreation = true;
+            //broadcastedCreation = true;
+        }
+    }
+
+
+    public void broadcastFulfillmentCenterCreation(MapLocation loc) throws GameActionException {
+        //change to rebroadcast every turn.
+        //if(broadcastedCreation) return; // don't re-broadcast
+        int[] message = new int[7];
+        message[0] = teamSecret;
+        message[1] = 4;
+        message[2] = loc.x; // x coord of HQ
+        message[3] = loc.y; // y coord of HQ
+        if (rc.canSubmitTransaction(message, 3)) {
+            rc.submitTransaction(message, 3);
+            //broadcastedCreation = true;
         }
     }
 
@@ -99,6 +140,19 @@ public class Communications {
                 count += 1;
             }
         }
+        return count;
+    }
+
+    public int getFulfillmentCenterCount() throws GameActionException {
+        int count = 0;
+        for(Transaction tx : rc.getBlock(rc.getRoundNum() - 1)) {
+            int[] mess = tx.getMessage();
+            if(mess[0] == teamSecret && mess[1] == 4){
+                System.out.println("heard about a fulfillment center");
+                count += 1;
+            }
+        }
+        System.out.println("heard about " + Integer.toString(count) + " fulfillment center");
         return count;
     }
 
