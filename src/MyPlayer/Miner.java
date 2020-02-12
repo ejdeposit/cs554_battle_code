@@ -7,6 +7,7 @@ public class Miner extends Unit {
 
     int numDesignSchools = 0;
     int numRefineries = 0;
+    int numFulfillmentCenters = 0;
     ArrayList<MapLocation> soupLocations = new ArrayList<MapLocation>();
 
     public Miner(RobotController r) {
@@ -18,15 +19,8 @@ public class Miner extends Unit {
     public void takeTurn() throws GameActionException {
         super.takeTurn();
 
-        /*
-        int tempCount=0;
-        tempCount = comms.getNewDesignSchoolCount();
-        System.out.println("design school count" + Integer.toString(tempCount));
-         */
-
         numDesignSchools += comms.getNewDesignSchoolCount();
-        System.out.println("i found design schools! " + numDesignSchools);
-        
+
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
 
@@ -57,6 +51,12 @@ public class Miner extends Unit {
         if (turnCount%25 ==0){
             if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
                 System.out.println("created a refinery");
+        }
+        //building fulfillment centers
+        if (turnCount%30 ==0){
+            if(tryBuild(RobotType.FULFILLMENT_CENTER, Util.randomDirection()))
+                System.out.println("created a FULFILLMENT CENTER");
+                //numFulfillmentCenters++;
         }
 
 
