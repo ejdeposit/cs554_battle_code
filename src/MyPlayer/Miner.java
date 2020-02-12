@@ -53,7 +53,7 @@ public class Miner extends Unit {
                 System.out.println("created a refinery");
         }
         //building fulfillment centers
-        if (turnCount%30 ==0){
+        if (turnCount%50 ==0){
             if(tryBuild(RobotType.FULFILLMENT_CENTER, Util.randomDirection()))
                 System.out.println("created a FULFILLMENT CENTER");
                 //numFulfillmentCenters++;

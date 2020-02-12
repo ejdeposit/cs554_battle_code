@@ -8,7 +8,7 @@ public class Refinery extends Building {
     }
 
 
-    @Override
+    /*@Override
     public void takeTurn() throws GameActionException {
         super.takeTurn();
         comms.sendRefineryLoc(rc.getLocation());
@@ -17,7 +17,7 @@ public class Refinery extends Building {
                 System.out.println("made a miner");
             }
         }
-    }
+    }*/
 
 
 }
