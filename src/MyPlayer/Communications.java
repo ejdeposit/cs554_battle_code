@@ -55,7 +55,6 @@ public class Communications {
         return null;
     }
 
-    //weird that this function works but getDesignSchoolCount doesn't work?
     public MapLocation getRefineryLocFromBlockchain() throws GameActionException {
         for (int i = 1; i < rc.getRoundNum(); i++){
             for(Transaction tx : rc.getBlock(i)) {
@@ -89,7 +88,6 @@ public class Communications {
 
 
     // check the latest block for unit creation messages
-    // Why doesn't this work???
     public int getNewDesignSchoolCount() throws GameActionException {
         int count = 0;
         for(Transaction tx : rc.getBlock(rc.getRoundNum() - 1)) {

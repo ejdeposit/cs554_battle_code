@@ -11,6 +11,7 @@ public class Drone extends Unit {
         super.takeTurn();
 
         Team enemy = rc.getTeam().opponent();
+
         if (!rc.isCurrentlyHoldingUnit()) {
 
             RobotInfo[] enemiesInRange = rc.senseNearbyRobots(GameConstants.DELIVERY_DRONE_PICKUP_RADIUS_SQUARED, enemy);
@@ -21,8 +22,7 @@ public class Drone extends Unit {
                 System.out.println("I picked up" + enemiesInRange[0].getID() + "!");
 
             }
-        }
-        else {
+        } else {
             rc.move(Util.randomDirection());
         }
         //rc.move(rc.getLocation().directionTo(new MapLocation(10, 10)));
@@ -34,7 +34,5 @@ public class Drone extends Unit {
     // Pick up a first robot within range
     //rc.pickUpUnit(enemiesInRange[0].getID());
     //System.out.println("I picked up " + enemiesInRange[0].getID() + "!");
-
-
-
 }
+

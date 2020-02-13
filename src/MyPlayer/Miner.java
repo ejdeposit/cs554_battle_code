@@ -7,6 +7,7 @@ public class Miner extends Unit {
 
     int numDesignSchools = 0;
     int numRefineries = 0;
+    int numFulfillmentCenters = 0;
     ArrayList<MapLocation> soupLocations = new ArrayList<MapLocation>();
 
     public Miner(RobotController r) {
@@ -15,28 +16,45 @@ public class Miner extends Unit {
 
     MapLocation refineryLoc= null;
 
+    int designSchoolsNearBy = 0;
+    int refineriesNearBy = 0;
+    int fullfillmentCenterNearBy = 0;
+
     public void takeTurn() throws GameActionException {
         super.takeTurn();
 
-        /*
-        int tempCount=0;
-        tempCount = comms.getNewDesignSchoolCount();
-        System.out.println("design school count" + Integer.toString(tempCount));
-         */
+        //look at nearby robots and record robots that are seen
+        //These could be changed to arrays of id's if we wanted to keep track of which was seen
+        //int provides somewhat of a measure of the frequenfy of the robots seen
+
+        RobotInfo robotInfo[];
+        robotInfo = rc.senseNearbyRobots(-1, rc.getTeam());
+        for (RobotInfo robo: robotInfo){
+            if(robo.type == RobotType.REFINERY){
+                refineriesNearBy += 1;
+                refineryLoc = robo.getLocation();
+            }
+            else if(robo.type == RobotType.DESIGN_SCHOOL){
+                designSchoolsNearBy += 1;
+            }
+            else if(robo.type == RobotType.FULFILLMENT_CENTER){
+                fullfillmentCenterNearBy += 1;
+            }
+        }
 
         numDesignSchools += comms.getNewDesignSchoolCount();
-        System.out.println("i found design schools! " + numDesignSchools);
-        
+
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
 
+        /*
         if(refineryLoc == null){
             refineryLoc=comms.getRefineryLocFromBlockchain();
             if(refineryLoc != null){
                 numRefineries +=1;
             }
         }
-
+        */
 
         for (Direction dir : Util.directions)
             if (tryMine(dir)) {
@@ -54,15 +72,22 @@ public class Miner extends Unit {
 
         // not sure why this if statement is causing miners not to build refineries
         //if (numRefineries < 1){
-        if (turnCount%25 ==0){
+        if (refineriesNearBy < 1){
             if(tryBuild(RobotType.REFINERY, Util.randomDirection()))
                 System.out.println("created a refinery");
+        }
+        //building fulfillment centers
+
+        if (fullfillmentCenterNearBy < 1){
+            if(tryBuild(RobotType.FULFILLMENT_CENTER, Util.randomDirection()))
+                System.out.println("created a FULFILLMENT CENTER");
+                //numFulfillmentCenters++;
         }
 
 
         //this iff statement does not limit design schools correctly for some reason
         //if (numDesignSchools < 1){
-        if (turnCount%35 ==0){
+        if (designSchoolsNearBy < 1){
             if(tryBuild(RobotType.DESIGN_SCHOOL, Util.randomDirection()))
                 System.out.println("created a design school");
         }
