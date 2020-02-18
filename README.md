@@ -1,8 +1,9 @@
 # Battlecode 2020 Scaffold
-
-This is the Battlecode 2020 scaffold, containing an `examplefuncsplayer`. Read https://2020.battlecode.org/getting-started!
 [![Build Status](https://travis-ci.com/mingjue/cs554_battle_code.svg?token=EFxcVF4QPZ5YesdYzxG2&branch=master)](https://travis-ci.com/mingjue/cs554_battle_code)
 [![Coverage Status](https://coveralls.io/repos/github/mingjue/cs554_battle_code/badge.svg?branch=master&t=0wYHsZ)](https://coveralls.io/github/mingjue/cs554_battle_code?branch=master)
+
+This is the Battlecode 2020 scaffold, containing an `examplefuncsplayer`. Read https://2020.battlecode.org/getting-started!
+
 ### Project Structure
 
 - `README.md`
