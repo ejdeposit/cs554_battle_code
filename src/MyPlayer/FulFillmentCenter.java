@@ -9,7 +9,7 @@ public class FulFillmentCenter extends Building {
         System.out.println("HI THERE");
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
         if(turnCount%10 ==0) {
             for (Direction dir : Util.directions)
@@ -21,6 +21,7 @@ public class FulFillmentCenter extends Building {
             System.out.println("Doing Nothing");
         }
         System.out.println("I do this every turn.");
+        return false;
     }
 
 }

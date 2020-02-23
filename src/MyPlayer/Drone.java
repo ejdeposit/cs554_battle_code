@@ -7,32 +7,36 @@ public class Drone extends Unit {
         super(r);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         Team enemy = rc.getTeam().opponent();
 
         if (!rc.isCurrentlyHoldingUnit()) {
 
-            RobotInfo[] enemiesInRange = rc.senseNearbyRobots(GameConstants.DELIVERY_DRONE_PICKUP_RADIUS_SQUARED, enemy);
-            //RobotInfo[] enemiesInRange = rc.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED, enemy);
+            RobotInfo[] enemiesInRange = rc.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED, enemy);
             if (enemiesInRange.length > 0) {
                 //pick up a first enemy robot within striking range
                 rc.pickUpUnit(enemiesInRange[0].getID());
                 System.out.println("I picked up" + enemiesInRange[0].getID() + "!");
 
+            } else {
+                rc.move(Util.randomDirection());
+                for (Direction dir : Util.directions) {
+                    MapLocation loc = rc.adjacentLocation(dir);
+                    if (rc.onTheMap(loc) && rc.senseFlooding(loc) && rc.senseRobotAtLocation(loc) == null) {
+                        System.out.println("Dropped unit into water at " + loc);
+                        rc.dropUnit(dir);
+                        return true;
+                    }
+
+                }
+
             }
-        } else {
-            rc.move(Util.randomDirection());
+
         }
-        //rc.move(rc.getLocation().directionTo(new MapLocation(10, 10)));
-        //rc.pickUpUnit(0);
-        //System.out.println("I picked up" + enemiesInRange[0].getID());
+
+
+        return true;
     }
-
-    //if (enemiesInRange.length > 0) {
-    // Pick up a first robot within range
-    //rc.pickUpUnit(enemiesInRange[0].getID());
-    //System.out.println("I picked up " + enemiesInRange[0].getID() + "!");
 }
-

@@ -20,7 +20,7 @@ public class Miner extends Unit {
     int refineriesNearBy = 0;
     int fullfillmentCenterNearBy = 0;
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         //look at nearby robots and record robots that are seen
@@ -109,6 +109,7 @@ public class Miner extends Unit {
             // otherwise, move randomly as usual
             System.out.println("I moved randomly!");
         }
+        return false;
     }
 
     /**

@@ -8,7 +8,7 @@ public class Landscaper extends Unit {
         super(r);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         if (hqLoc != null && hqLoc.isAdjacentTo(rc.getLocation())) {
@@ -53,6 +53,7 @@ public class Landscaper extends Unit {
         } else {
             nav.goTo(Util.randomDirection());
         }
+        return false;
     }
 
     boolean tryDig() throws GameActionException {

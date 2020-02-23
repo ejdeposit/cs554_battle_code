@@ -9,7 +9,7 @@ public class Shooter extends Building {
     }
 
     @Override
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         while (true) {
             RobotInfo[] robots = rc.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED,rc.getTeam());
             for (RobotInfo r : robots){
