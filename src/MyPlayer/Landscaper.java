@@ -64,8 +64,9 @@ public class Landscaper extends Unit {
             dir = hqLoc.directionTo(rc.getLocation());
         }
         if(rc.canDigDirt(dir)){
+            System.out.println("can did dirt is true");
             rc.digDirt(dir);
-            rc.setIndicatorDot(rc.getLocation().add(dir), 255, 0, 0);
+            //rc.setIndicatorDot(rc.getLocation().add(dir), 255, 0, 0);
             return true;
         }
         return false;
