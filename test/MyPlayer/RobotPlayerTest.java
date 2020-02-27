@@ -205,16 +205,16 @@ public class RobotPlayerTest {
 		System.setOut(new PrintStream(outContent));
 	}
 	@Test
-	public void testLanscaper2()throws GameActionException, NullPointerException{
-		lsMock.hqLoc=null;
-		Boolean result;
-		result=lsMock.tryDig();
+	//public void testLanscaper2()throws GameActionException, NullPointerException{
+		//lsMock.hqLoc=null;
+		//Boolean result;
+		//result=lsMock.tryDig();
 		//System.out.println("hello?");
 		//System.out.println(outContent.toString());
-		assertThat(outContent.toString(), equalTo("hello"));
-		assertThat(result, equalTo(false));
+		//assertThat(outContent.toString(), equalTo("hello"));
+		//(result, equalTo(false));
 		//assertEquals(2, 1+1);
-	}
+	//}
 	@After
 	public void landscaper2TearDown() {
 		System.setOut(originalOut);
