@@ -9,7 +9,7 @@ public class HQ extends Building {
         super(r);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         if(turnCount == 1) {
@@ -22,5 +22,6 @@ public class HQ extends Building {
                     System.out.println("I made a miner!");
                 }
         }
+        return false;
     }
 }

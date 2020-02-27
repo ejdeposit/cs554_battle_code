@@ -12,8 +12,9 @@ public class Robot {
         comms = new Communications(rc);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         turnCount += 1;
+        return false;
     }
 
     /**

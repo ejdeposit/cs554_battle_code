@@ -19,8 +19,10 @@ public class Miner extends Unit {
     int designSchoolsNearBy = 0;
     int refineriesNearBy = 0;
     int fullfillmentCenterNearBy = 0;
+    int netgunNearBy = 0;
+    int vaporatorNearBy = 0;
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         //look at nearby robots and record robots that are seen
@@ -39,6 +41,12 @@ public class Miner extends Unit {
             }
             else if(robo.type == RobotType.FULFILLMENT_CENTER){
                 fullfillmentCenterNearBy += 1;
+            }
+            else if(robo.type == RobotType.NET_GUN) {
+                netgunNearBy +=1 ;
+            }
+            else if(robo.type == RobotType.VAPORATOR) {
+                vaporatorNearBy +=1 ;
             }
         }
 
@@ -92,6 +100,16 @@ public class Miner extends Unit {
                 System.out.println("created a design school");
         }
 
+        if(netgunNearBy < 1) {
+            if(tryBuild(RobotType.NET_GUN,Util.randomDirection()))
+                System.out.println("created a netgun");
+        }
+
+        if(vaporatorNearBy < 1) {
+            if(tryBuild(RobotType.VAPORATOR,Util.randomDirection()))
+                System.out.println("created a vaporator");
+        }
+
         if (rc.getSoupCarrying() == RobotType.MINER.soupLimit) {
             if(refineryLoc != null) {
                 if(nav.goTo(refineryLoc))
@@ -109,6 +127,7 @@ public class Miner extends Unit {
             // otherwise, move randomly as usual
             System.out.println("I moved randomly!");
         }
+        return false;
     }
 
     /**
