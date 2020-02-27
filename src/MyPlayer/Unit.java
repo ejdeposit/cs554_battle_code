@@ -12,10 +12,11 @@ public class Unit extends Robot {
         nav = new Navigation(rc);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         findHQ();
+        return false;
     }
 
     public void findHQ() throws GameActionException {

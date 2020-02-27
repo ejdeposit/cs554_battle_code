@@ -3,8 +3,8 @@ import battlecode.common.*;
 
 public class Shooter extends Building {
 
-    public Shooter(RobotController r) {
-        super(r);
+    public Shooter(RobotController rc) {
+        super(rc);
     }
 
     public void takeTurn() throws GameActionException {

@@ -8,7 +8,7 @@ public class Landscaper extends Unit {
         super(r);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         if (hqLoc != null && hqLoc.isAdjacentTo(rc.getLocation())) {
@@ -53,6 +53,7 @@ public class Landscaper extends Unit {
         } else {
             nav.goTo(Util.randomDirection());
         }
+        return false;
     }
 
     boolean tryDig() throws GameActionException {
@@ -63,8 +64,9 @@ public class Landscaper extends Unit {
             dir = hqLoc.directionTo(rc.getLocation());
         }
         if(rc.canDigDirt(dir)){
+            System.out.println("can did dirt is true");
             rc.digDirt(dir);
-            rc.setIndicatorDot(rc.getLocation().add(dir), 255, 0, 0);
+            //rc.setIndicatorDot(rc.getLocation().add(dir), 255, 0, 0);
             return true;
         }
         return false;

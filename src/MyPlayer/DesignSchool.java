@@ -7,7 +7,7 @@ public class DesignSchool extends Building {
         super(r);
     }
 
-    public void takeTurn() throws GameActionException {
+    public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
         // will only actually happen if we haven't already broadcasted the creation
@@ -19,5 +19,6 @@ public class DesignSchool extends Building {
                 }
             }
         }
+        return false;
     }
 }
