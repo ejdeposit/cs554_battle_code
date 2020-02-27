@@ -20,6 +20,7 @@ public class Miner extends Unit {
     int refineriesNearBy = 0;
     int fullfillmentCenterNearBy = 0;
     int netgunNearBy = 0;
+    int vaporatorNearBy = 0;
 
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
@@ -43,6 +44,9 @@ public class Miner extends Unit {
             }
             else if(robo.type == RobotType.NET_GUN) {
                 netgunNearBy +=1 ;
+            }
+            else if(robo.type == RobotType.VAPORATOR) {
+                vaporatorNearBy +=1 ;
             }
         }
 
@@ -99,6 +103,11 @@ public class Miner extends Unit {
         if(netgunNearBy < 1) {
             if(tryBuild(RobotType.NET_GUN,Util.randomDirection()))
                 System.out.println("created a netgun");
+        }
+
+        if(vaporatorNearBy < 1) {
+            if(tryBuild(RobotType.VAPORATOR,Util.randomDirection()))
+                System.out.println("created a vaporator");
         }
 
         if (rc.getSoupCarrying() == RobotType.MINER.soupLimit) {
