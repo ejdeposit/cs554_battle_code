@@ -11,7 +11,7 @@ public class DesignSchool extends Building {
         super.takeTurn();
 
         // will only actually happen if we haven't already broadcasted the creation
-        comms.broadcastDesignSchoolCreation(rc.getLocation());
+        //comms.broadcastDesignSchoolCreation(rc.getLocation());
         if(turnCount%30==0) {
             for (Direction dir : Util.directions) {
                 if (tryBuild(RobotType.LANDSCAPER, dir)) {

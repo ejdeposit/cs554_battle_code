@@ -11,10 +11,12 @@ public class HQ extends Building {
 
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
-
+/*
         if(turnCount == 1) {
             comms.sendHqLoc(rc.getLocation());
         }
+
+ */
         if(numMiners < 5) {
             for (Direction dir : Util.directions)
                 if(tryBuild(RobotType.MINER, dir)){

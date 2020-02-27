@@ -21,7 +21,7 @@ public class Communications {
     public Communications(RobotController r) {
         rc = r;
     }
-
+/*
     public void sendHqLoc(MapLocation loc) throws GameActionException {
         int[] message = new int[7];
         message[0] = teamSecret;
@@ -31,7 +31,7 @@ public class Communications {
         if (rc.canSubmitTransaction(message, 3))
             rc.submitTransaction(message, 3);
     }
-
+*/
     public void sendRefineryLoc(MapLocation loc) throws GameActionException {
         int[] message = new int[7];
         message[0] = teamSecret;
@@ -41,7 +41,7 @@ public class Communications {
         if (rc.canSubmitTransaction(message, 3))
             rc.submitTransaction(message, 3);
     }
-
+/*
     public MapLocation getHqLocFromBlockchain() throws GameActionException {
         for (int i = 1; i < rc.getRoundNum(); i++){
             for(Transaction tx : rc.getBlock(i)) {
@@ -54,7 +54,9 @@ public class Communications {
         }
         return null;
     }
+/*
 
+/*
     public MapLocation getRefineryLocFromBlockchain() throws GameActionException {
         for (int i = 1; i < rc.getRoundNum(); i++){
             for(Transaction tx : rc.getBlock(i)) {
@@ -67,11 +69,11 @@ public class Communications {
         }
         return null;
     }
-
+*/
 
 
     public boolean broadcastedCreation = false;
-
+/*
     public void broadcastDesignSchoolCreation(MapLocation loc) throws GameActionException {
         if(broadcastedCreation) return; // don't re-broadcast
 
@@ -85,8 +87,8 @@ public class Communications {
             broadcastedCreation = true;
         }
     }
-
-
+*/
+    /*
     // check the latest block for unit creation messages
     public int getNewDesignSchoolCount() throws GameActionException {
         int count = 0;
@@ -99,6 +101,8 @@ public class Communications {
         }
         return count;
     }
+    */
+
 
     public void broadcastSoupLocation(MapLocation loc ) throws GameActionException {
         int[] message = new int[7];
