@@ -350,6 +350,7 @@ public class RobotPlayerTest {
 	RobotController fullFillmentRC1;
 	private final ByteArrayOutputStream fullfillmentOutContent1 = new ByteArrayOutputStream();
 
+	/*
 	@Before
 	public void setupFullfillmentCenterTakesTurn() throws GameActionException{
 		fullFillmentRC1 = mock(RobotController.class);
@@ -408,7 +409,7 @@ public class RobotPlayerTest {
 		System.setOut(originalOut);
 	}
 
-
+*/
 
 	@Test
 	public void testSanity() {
