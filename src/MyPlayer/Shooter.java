@@ -13,6 +13,7 @@ public class Shooter extends Building {
 
         // shoot nearby enemies
         Team enemy = rc.getTeam().opponent();
+        //Team enemy = rc.getTeam();
         RobotInfo[] enemiesInRange = rc.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED, enemy);
 
         if (enemiesInRange.length > 0) {
