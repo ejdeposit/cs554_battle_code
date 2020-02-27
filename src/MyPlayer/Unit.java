@@ -28,10 +28,13 @@ public class Unit extends Robot {
                     hqLoc = robot.location;
                 }
             }
+            /*
             if(hqLoc == null) {
                 // if still null, search the blockchain
                 hqLoc = comms.getHqLocFromBlockchain();
             }
+
+             */
         }
     }
 }
