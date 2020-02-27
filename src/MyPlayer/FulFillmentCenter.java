@@ -11,7 +11,9 @@ public class FulFillmentCenter extends Building {
 
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
+
         if(turnCount%30 ==0) {
+
             for (Direction dir : Util.directions)
                 if(tryBuild(RobotType.DELIVERY_DRONE, dir)){
                     System.out.println("created a drone");
