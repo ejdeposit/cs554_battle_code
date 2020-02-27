@@ -46,7 +46,7 @@ public class Miner extends Unit {
             }
         }
 
-        numDesignSchools += comms.getNewDesignSchoolCount();
+       // numDesignSchools += comms.getNewDesignSchoolCount();
 
         comms.updateSoupLocations(soupLocations);
         checkIfSoupGone();
@@ -129,7 +129,10 @@ public class Miner extends Unit {
      * @throws GameActionException
      */
     boolean tryMine(Direction dir) throws GameActionException {
-        if (rc.isReady() && rc.canMineSoup(dir)) {
+        boolean isready=rc.isReady();
+        boolean canMine=rc.canMineSoup(dir);
+        if (isready && canMine) {
+        //if (rc.isReady() && rc.canMineSoup(dir)) {
             rc.mineSoup(dir);
             return true;
         } else return false;
