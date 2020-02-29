@@ -10,6 +10,7 @@ import org.junit.After;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -410,6 +411,34 @@ public class RobotPlayerTest {
 	}
 
 */
+
+	//test Drone
+	@Test
+	public void testpickupcow()throws GameActionException, NullPointerException{
+		//HQ hq =  new HQ(rcMock);
+		Drone d = new Drone(rcMock);
+		//hqMock.numMiners=0;
+		when(rcMock.getCurrentSensorRadiusSquared()).thenReturn(8) ;
+		when(rcMock.senseNearbyRobots(8)).thenReturn(new RobotInfo[]{new RobotInfo(1, Team.A, RobotType.COW, 0, false, 0, 0, 0, new MapLocation(5,5))});
+		//assertThat(outContent.toString(), equalTo("I made a miner!"));
+		when(rcMock.getLocation()).thenReturn(new MapLocation(4,5));
+		when(rcMock.canPickUpUnit(1)).thenReturn(true);
+		boolean result = d.pickupcow();
+		assertThat(result, equalTo(true));
+	}
+
+	@Test
+	public void testtakeTurn()throws GameActionException, NullPointerException{
+		//HQ hq =  new HQ(rcMock);
+		Shooter d = new Shooter(rcMock);
+		//hqMock.numMiners=0;
+		when(rcMock.getTeam()).thenReturn(Team.A);
+		when(rcMock.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED,Team.B)).thenReturn(new RobotInfo[]{new RobotInfo(1, Team.B, RobotType.DELIVERY_DRONE, 0, false, 0, 0, 0, new MapLocation(5,5))});
+		when(rcMock.canShootUnit(1)).thenReturn(true);
+		boolean result = d.takeTurn();
+		assertThat(result, equalTo(true));
+	}
+
 
 	@Test
 	public void testSanity() {
