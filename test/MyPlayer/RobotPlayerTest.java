@@ -441,6 +441,39 @@ public class RobotPlayerTest {
 
 
 	@Test
+	public void testFulFillmentCenter()throws GameActionException, NullPointerException{
+		//HQ hq =  new HQ(rcMock);
+		FulFillmentCenter d = new FulFillmentCenter(rcMock);
+		Robot t = new Robot(rcMock);
+		//hqMock.numMiners=0;
+//		when(rcMock.getTeam()).thenReturn(Team.A);
+//		when(rcMock.senseNearbyRobots(GameConstants.NET_GUN_SHOOT_RADIUS_SQUARED,Team.B)).thenReturn(new RobotInfo[]{new RobotInfo(1, Team.B, RobotType.DELIVERY_DRONE, 0, false, 0, 0, 0, new MapLocation(5,5))});
+//		when(rcMock.canShootUnit(1)).thenReturn(true);
+		for (int i =0; i<30; i++){
+			t.takeTurn();
+
+		}
+		when(rcMock.isReady()).thenReturn(true);
+		when(rcMock.canBuildRobot(RobotType.DELIVERY_DRONE,Direction.EAST)).thenReturn(true);
+		boolean result = d.takeTurn();
+		assertThat(result, equalTo(false));
+	}
+
+
+	@Test
+	public void testLanscaper2()throws GameActionException, NullPointerException{
+		Landscaper d = new Landscaper(rcMock);
+		when(rcMock.senseNearbyRobots()).thenReturn(new RobotInfo[]{new RobotInfo(1, Team.A, RobotType.HQ, 0, false, 0, 0, 0, new MapLocation(5,5))});
+		when(rcMock.getTeam()).thenReturn(Team.A);
+		when(rcMock.getLocation()).thenReturn(new MapLocation(5,6));
+		when(rcMock.canDigDirt(Direction.EAST)).thenReturn(true);
+		when(rcMock.canDepositDirt(Direction.NORTH)).thenReturn(true);
+		boolean result = d.takeTurn();
+		assertThat(result, equalTo(false));
+	}
+
+
+	@Test
 	public void testSanity() {
 		assertEquals(2, 1+1);
 		//assertEquals(2, 1);
