@@ -8,6 +8,7 @@ public class Shooter extends Building {
         super(r);
     }
 
+    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
