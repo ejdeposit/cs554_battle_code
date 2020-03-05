@@ -8,7 +8,6 @@ public class Shooter extends Building {
         super(r);
     }
 
-    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
@@ -23,6 +22,7 @@ public class Shooter extends Building {
                 if (rc.canShootUnit(enemiesInRange[i].getID())) {
                     rc.shootUnit(enemiesInRange[i].getID());
                     System.out.println("HQ shot down" + enemiesInRange[0].getID());
+                    return true;
                 }
             }
         }
