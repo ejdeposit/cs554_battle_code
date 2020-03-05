@@ -12,6 +12,7 @@ public class Unit extends Robot {
         nav = new Navigation(rc);
     }
 
+    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 

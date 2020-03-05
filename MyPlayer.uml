@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>MyPlayer</OriginalElement>
+  <nodes>
+    <node x="1000.0" y="1704.0">MyPlayer.Landscaper</node>
+    <node x="424.74999999999994" y="1406.0">MyPlayer.Building</node>
+    <node x="503.99999999999994" y="1715.0">MyPlayer.Shooter</node>
+    <node x="186.0" y="1694.0">MyPlayer.FulFillmentCenter</node>
+    <node x="0.0" y="0.0">MyPlayer.RobotPlayerTest</node>
+    <node x="1186.0" y="1562.0">MyPlayer.Miner</node>
+    <node x="1499.0" y="1683.0">MyPlayer.Drone</node>
+    <node x="742.9166666666665" y="1152.0">MyPlayer.Robot</node>
+    <node x="814.0" y="1715.0">MyPlayer.DesignSchool</node>
+    <node x="1721.0" y="1152.0">MyPlayer.Communications</node>
+    <node x="372.99999999999994" y="1727.0">MyPlayer.Vaporator</node>
+    <node x="267.0" y="1966.0">MyPlayer.RobotPlayer</node>
+    <node x="0.0" y="1966.0">MyPlayer.Navigation</node>
+    <node x="0.0" y="1694.0">MyPlayer.HQ</node>
+    <node x="690.0" y="1727.0">MyPlayer.Refinery</node>
+    <node x="1248.0" y="1363.0">MyPlayer.Unit</node>
+    <node x="519.0" y="1966.0">MyPlayer.Util</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="MyPlayer.HQ" target="MyPlayer.Building">
+      <point x="0.0" y="-47.5" />
+      <point x="83.0" y="1522.0" />
+      <point x="438.5833333333332" y="1522.0" />
+      <point x="-69.16666666666674" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.Building" target="MyPlayer.Robot">
+      <point x="0.0" y="-26.5" />
+      <point x="507.74999999999994" y="1338.0" />
+      <point x="815.1666666666665" y="1338.0" />
+      <point x="-72.25" y="80.5" />
+    </edge>
+    <edge source="MyPlayer.FulFillmentCenter" target="MyPlayer.Building">
+      <point x="0.0" y="-47.5" />
+      <point x="269.5" y="1532.0" />
+      <point x="466.24999999999994" y="1532.0" />
+      <point x="-41.5" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.Drone" target="MyPlayer.Unit">
+      <point x="0.0" y="-58.5" />
+      <point x="1587.5" y="1542.0" />
+      <point x="1388.8333333333335" y="1542.0" />
+      <point x="56.33333333333337" y="69.5" />
+    </edge>
+    <edge source="MyPlayer.Vaporator" target="MyPlayer.Building">
+      <point x="0.0" y="-14.5" />
+      <point x="428.49999999999994" y="1542.0" />
+      <point x="493.9166666666667" y="1542.0" />
+      <point x="-13.833333333333258" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.DesignSchool" target="MyPlayer.Building">
+      <point x="0.0" y="-26.5" />
+      <point x="897.0" y="1522.0" />
+      <point x="576.9166666666667" y="1522.0" />
+      <point x="69.16666666666674" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.Refinery" target="MyPlayer.Building">
+      <point x="0.0" y="-14.5" />
+      <point x="742.0" y="1532.0" />
+      <point x="549.25" y="1532.0" />
+      <point x="41.5" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.Unit" target="MyPlayer.Robot">
+      <point x="0.0" y="-69.5" />
+      <point x="1332.5" y="1338.0" />
+      <point x="959.6666666666665" y="1338.0" />
+      <point x="72.25" y="80.5" />
+    </edge>
+    <edge source="MyPlayer.Shooter" target="MyPlayer.Building">
+      <point x="0.0" y="-26.5" />
+      <point x="587.0" y="1542.0" />
+      <point x="521.5833333333333" y="1542.0" />
+      <point x="13.833333333333258" y="26.5" />
+    </edge>
+    <edge source="MyPlayer.Landscaper" target="MyPlayer.Unit">
+      <point x="0.0" y="-37.5" />
+      <point x="1083.0" y="1542.0" />
+      <point x="1276.1666666666667" y="1542.0" />
+      <point x="-56.333333333333314" y="69.5" />
+    </edge>
+    <edge source="MyPlayer.Miner" target="MyPlayer.Unit">
+      <point x="0.0" y="-179.5" />
+      <point x="0.0" y="69.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3647058823529412" x="1047.0" y="1052.5" />
+  <SelectedNodes>
+    <node>MyPlayer.Unit</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

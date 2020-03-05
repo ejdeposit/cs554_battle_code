@@ -8,6 +8,7 @@ public class Building extends Robot {
         // building specific setup here
     }
 
+    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
         return false;

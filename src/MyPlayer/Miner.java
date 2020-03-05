@@ -22,6 +22,7 @@ public class Miner extends Unit {
     int netgunNearBy = 0;
     int vaporatorNearBy = 0;
 
+    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 

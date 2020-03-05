@@ -9,6 +9,7 @@ public class Drone extends Unit {
         super(r);
     }
 
+    @Override
     public boolean takeTurn() throws GameActionException {
         super.takeTurn();
 
@@ -32,6 +33,7 @@ public class Drone extends Unit {
 
         return false;
     }
+
 
     public boolean pickupcow() throws GameActionException {
         MapLocation cowloc = null;
